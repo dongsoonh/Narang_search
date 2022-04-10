@@ -15,8 +15,10 @@ import time
 # 1) 사이트에서 카테고리 코드 뽑기
 options = webdriver.ChromeOptions()
 options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36")
-makeup = "10031769"
-makeup_face = "10031879"
+
+catagories ={"skincare"}
+sub_cat = "10031769"
+makeup_1= []
 makeup_face_Foundation = "10032503"
 makeup_eye = "10031885"
 
@@ -40,8 +42,8 @@ writer.writerow(title)
 for page in range(1, 96):
     driver.execute_script("fn_movePage({0}, 'GOODS', 'searchShopPrdList')".format(page))
     driver.implicitly_wait(200)
-    time.sleep(2)
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(1)
     products = len(driver.find_elements(By.CSS_SELECTOR, ".unit_info > span.brand > i"))
     for i, num in enumerate(range(1, products+1)):
         driver.implicitly_wait(200)
@@ -60,6 +62,8 @@ for page in range(1, 96):
 
             print(product_info)
             writer.writerow(product_info)
+        
         except:
             pass
+ 
         
